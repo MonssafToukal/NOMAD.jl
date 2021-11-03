@@ -467,7 +467,8 @@ struct NomadProblem
                           A::Union{Nothing, Matrix{Float64}} = nothing,
                           b::Union{Nothing, Vector{Float64}} = nothing,
                           min_mesh_size::Vector{Float64} = zeros(Float64, nb_inputs),
-                          initial_mesh_size::Vector{Float64} = Float64[])
+                          initial_mesh_size::Vector{Float64} = Float64[],
+                          kwargs...)
 
         @assert nb_inputs > 0 "NOMAD.jl error : wrong parameters, the number of inputs must be strictly positive"
         @assert nb_inputs == length(lower_bound) "NOMAD.jl error: wrong parameters, lower bound is not consistent with the number of inputs"
@@ -495,7 +496,7 @@ struct NomadProblem
         return new(nb_inputs, nb_outputs, input_types,
                    granularity, min_mesh_size, initial_mesh_size,
                    lower_bound, upper_bound,
-                   output_types, A, b, eval_bb, NomadOptions())
+                   output_types, A, b, eval_bb, NomadOptions(kwargs...))
     end
 end
 
